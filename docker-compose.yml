@@ -9,6 +9,7 @@ services:
 #   Directorios del host que se montarán en el contenedor (pueden modificarse desde ambos lados)
     volumes:
     #Aqui pon tu directorio al repo
+#      - /Users/mARLA/Documents/QUINTO SEMESTRE/LDAW-PairWork
       - /Users/mARLA/Documents/QUINTO SEMESTRE/LDAW-PairWork
 #   Nombre que se dará al contenedor (si no se establece se asigna uno automático)
     container_name: laravel_ldaw_ad19

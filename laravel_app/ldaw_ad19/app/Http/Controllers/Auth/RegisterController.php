@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use DB;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -20,7 +21,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
+    protected $instituciones;
     use RegistersUsers;
 
     /**
@@ -38,6 +39,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+       
     }
 
     /**
@@ -48,10 +50,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:30'],
+            'apellido_paterno' => ['required', 'string', 'max:25'],
+            'apellido_materno' => ['required', 'string', 'max:25'],
+            'edad' => ['required', 'numeric', 'max:25'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:Asistentes'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'ciudad' => ['required', 'string', 'max:30'],
+            'id_institucion' => ['required', 'numeric', 'max:30'],
         ]);
     }
 
@@ -65,8 +73,30 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'apellido_paterno' => $data['apellido_paterno'],
+            'apellido_materno' => $data['apellido_materno'],
+            'edad' => $data['edad'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'ciudad' => $data['ciudad'],
+            'id_institucion' => $data['id_institucion'],
         ]);
+    }
+
+      /**
+     * Getting Instituciones from database
+     *
+     * 
+     * 
+     */
+
+    public function showRegistrationForm()
+    {
+        
+        $instituciones = DB::select('select id_institucion, nombre from Institucion');
+      
+        return view('auth.register')->with('instituciones', $instituciones);
+        
+        
     }
 }

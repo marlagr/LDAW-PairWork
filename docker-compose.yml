@@ -10,7 +10,7 @@ services:
     volumes:
     #Aqui pon tu directorio al repo
 #      - /Users/mARLA/Documents/QUINTO SEMESTRE/LDAW-PairWork
-      - /Users/mARLA/Documents/QUINTO SEMESTRE/LDAW-PairWork
+      - /home/sk32/Documentos/skul/7_semestre/LDAW/LDAW-PairWork
 #   Nombre que se dará al contenedor (si no se establece se asigna uno automático)
     container_name: laravel_ldaw_ad19
 #    command: service apache2 start

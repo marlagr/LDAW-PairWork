@@ -82,15 +82,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="id_institucion" class="col-md-4 col-form-label text-md-right">{{ __('Institución') }}</label>
-                           
+                            <label for="instituciones" class="col-md-4 col-form-label text-md-right">{{ __('Institución') }}</label>
                             <div class="col-md-6">
-                            
-                                <select name="id_institucion" id="id_institucion" class="form-control">
-                                    <option value="1">Institución 1</option>
-                                </select>
-                                <!-- <input id="id_institucion" type="select" class="form-control @error('ciudad') is-invalid @enderror" name="id_institucion" value="{{ old('id_institucion') }}" required autocomplete="id_institucion" autofocus> -->
-
+                                <select name="id_institucion" id="id_institucion" class="form-control" required>                                   
+                                    @foreach($instituciones as $item)
+                                        <option value="{{ $item->id_institucion }}">{{ $item->nombre }}</option>
+                                    @endforeach
+                                </select>                          
                                 @error('id_institucion')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

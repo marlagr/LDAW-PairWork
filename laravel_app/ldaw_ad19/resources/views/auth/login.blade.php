@@ -6,8 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
+                <div class="row justify-content-left float-left">
+                    <img src="img/login.jpeg" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="card-body-justify-content-righ float-left">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -70,5 +72,6 @@
             </div>
         </div>
     </div>
+    
 </div>
 @endsection

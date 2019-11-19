@@ -92,11 +92,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        
         $instituciones = DB::select('select id_institucion, nombre from Institucion');
-      
-        return view('auth.register')->with('instituciones', $instituciones);
-        
-        
+        return view('auth.register')->with('instituciones', $instituciones);   
     }
 }

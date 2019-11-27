@@ -4,20 +4,13 @@
 @section('content')
 <div class="container">
     <header class="row">
-        @include('includes.header')
     </header>
     <div id="main" class="row">
         <!-- sidebar content -->
         <div id="sidebar" class="col-md-4">
             @include('includes.sidebar')
         </div>
-        <ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
-</ul>
+
         <div id="content" class="col-md-8">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -34,6 +27,7 @@
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
+                    @endif
                     </div>
                 </div>
             </div>

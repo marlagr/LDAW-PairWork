@@ -81,6 +81,8 @@ class RegisterController extends Controller
             'ciudad' => $data['ciudad'],
             'id_institucion' => $data['id_institucion'],
         ]);
+
+      
     }
 
       /**

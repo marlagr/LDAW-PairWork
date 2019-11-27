@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use DB;
 use Illuminate\Http\Request;
 
@@ -17,10 +15,9 @@ class Institucion extends Controller
     {
         //
     }
-
     public function showRegistrationForm()
     {
         $instituciones = Instituciones::all();
-        return view('auth.register')->with('instituciones', $instituciones);   
+        return view('auth.register')->with('instituciones', $instituciones);
     }
 }

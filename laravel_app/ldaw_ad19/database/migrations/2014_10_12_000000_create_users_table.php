@@ -23,8 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('ciudad');
             $table->integer('id_institucion');
-            $table->timestamps('updated_at');
-            $table->timestamps('created_at');
+           
         });
     }
 

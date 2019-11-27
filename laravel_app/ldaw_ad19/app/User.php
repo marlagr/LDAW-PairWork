@@ -44,12 +44,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Rol::class)->withTimestamps();
     }
+
     public function authorizeRoles($roles)
     {
         abort_unless($this->hasAnyRole($roles), 401);
         return true;
     }
-    
     public function hasAnyRole($roles)
     {
         if (is_array($roles)) {
@@ -60,8 +60,8 @@ class User extends Authenticatable
             }
         } else {
             if ($this->hasRole($roles)) {
-                return true;
-            }
+                return true; 
+            }   
         }
         return false;
     }
@@ -72,4 +72,5 @@ class User extends Authenticatable
         }
         return false;
     }
+    
 }

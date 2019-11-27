@@ -13,7 +13,7 @@ class RolAsistentes extends Migration
      */
     public function up()
     {
-        Schema::create('Rol', function (Blueprint $table) {
+        Schema::create('rol_asistentes', function (Blueprint $table) {
             $table->integer('id_rol');
             $table->integer('id_usuario');
         });

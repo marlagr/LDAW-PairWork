@@ -83,9 +83,12 @@ class RegisterController extends Controller
             'id_institucion' => $data['id_institucion'],
         ]);
 
-        $user->roles()->attach(Rol::where('name', 'user')->first());
-       return $user;
-    }
+        $user->roles()->attach(Rol::where('nombre', 'Administrador')->first());
+
+        return $user; 
+
+        
+     }
 
       /**
      * Getting Instituciones from database

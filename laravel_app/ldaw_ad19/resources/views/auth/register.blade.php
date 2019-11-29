@@ -5,7 +5,7 @@
     <h1 >&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends  fa-2x"></i></h1>
     <h2><b>Registrate</b></h2>
     <h4>Crea una cuenta para que puedas ir a los mejores eventos</h4>
-    <h6 font-weight="lighter">Recibe notificaciones y explora eventos en tu area. Asiste a los mejores eventos. Paga rapido con tu tarjeta y confirma tu asistencia. </h6>
+    <h6 font-weight="lighter">Recibe notificaciones y explora eventos en tu área. Asiste a los mejores eventos. Paga rápido con tu tarjeta y confirma tu asistencia. </h6>
     <br>
 </div>
 <div class="container">

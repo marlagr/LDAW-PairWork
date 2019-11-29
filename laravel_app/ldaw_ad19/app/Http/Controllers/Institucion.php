@@ -15,9 +15,9 @@ class Institucion extends Controller
     {
         //
     }
-    public function showRegistrationForm()
+    /*public function showRegistrationForm()
     {
-        $instituciones = Instituciones::all();
+        $instituciones = Institucion::all();
         return view('auth.register')->with('instituciones', $instituciones);
-    }
+    }*/
 }

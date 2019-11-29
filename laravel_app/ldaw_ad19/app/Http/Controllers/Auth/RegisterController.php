@@ -92,7 +92,7 @@ class RegisterController extends Controller
 
       /**
      * Getting Instituciones from database
-     *
+     * esta es la funcion que se cncenta con el register blade
      * 
      * 
      */

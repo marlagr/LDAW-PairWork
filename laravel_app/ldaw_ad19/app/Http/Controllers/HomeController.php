@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Http\Controllers\Auth;
 
 
 class HomeController extends Controller
 {
+    protected $permisos;
+    protected $role;
     /**
      * Create a new controller instance.
      *
@@ -17,6 +21,8 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    
+
     /**
      * Show the application dashboard.
      *
@@ -25,6 +31,14 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $request->user()->authorizeRoles(['Usuario', 'Administrador']);
-        return view('home');
+        
+        if($request->user()->hasRole('Administrador')){
+            $permisos = DB::select('select DISTINCT Permisos.nombre  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 1 and Permisos.id_permiso = rol_permiso.id_permiso');
+        }else{
+            $permisos = DB::select('select DISTINCT Permisos.nombre  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 2 and Permisos.id_permiso = rol_permiso.id_permiso');
+        }
+        return view('home')->with('permisos', $permisos);
     }
+
+
 }

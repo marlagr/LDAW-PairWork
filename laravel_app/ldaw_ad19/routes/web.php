@@ -30,6 +30,8 @@ Route::get('/misEventos', 'Eventos@__invoke')->name('myEvents');
 Route::get('/instituciones', 'Eventos@__invoke')->name('institutions');
 Route::get('/nuevoEvento', 'RegistrarEventoController@__invoke')->name('nuevoEvento');
 Route::post('/registrarEvento', 'RegistrarEventoController@create')->name('registrarEvento');
+Route::get('/evento', 'DetalleEvento@__invoke')->name('evento');
+
 
 
 #Add "use Illuminate\Support\Facades\DB;" at the top of the script

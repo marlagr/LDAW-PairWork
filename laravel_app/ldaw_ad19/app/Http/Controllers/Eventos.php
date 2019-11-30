@@ -15,16 +15,19 @@ class Eventos extends Controller
      */
     public function __invoke(Request $request)
     {
+        if(\Auth::check()){
+            $request->user()->authorizeRoles(['Usuario', 'Administrador']);
+            
+            if($request->user()->hasRole('Administrador')){
+                $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 1 and Permisos.id_permiso = rol_permiso.id_permiso');
+            }else{
+                $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 2 and Permisos.id_permiso = rol_permiso.id_permiso');
+            }
 
-        $request->user()->authorizeRoles(['Usuario', 'Administrador']);
-        
-        if($request->user()->hasRole('Administrador')){
-            $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 1 and Permisos.id_permiso = rol_permiso.id_permiso');
+            $eventos = DB::select('select * from Evento');
+            return view('admin.Eventos.eventos')->with('eventos', $eventos)->with('permisos', $permisos);
         }else{
-            $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 2 and Permisos.id_permiso = rol_permiso.id_permiso');
+                return redirect('auth/login');
         }
-
-        $eventos = DB::select('select * from Evento');
-        return view('admin.Eventos.eventos')->with('eventos', $eventos)->with('permisos', $permisos);
     }
 }

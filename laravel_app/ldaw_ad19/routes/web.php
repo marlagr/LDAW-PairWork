@@ -25,10 +25,11 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/eventos', 'Eventos@__invoke')->name('eventos');
 Route::get('/eventosA', 'Eventos@__invoke')->name('eventosAdmin');
-Route::get('/miPerfil', 'Eventos@__invoke')->name('profile');
+Route::get('/miPerfil', 'MiCuentaController@__invoke')->name('profile');
 Route::get('/misEventos', 'Eventos@__invoke')->name('myEvents');
 Route::get('/instituciones', 'Eventos@__invoke')->name('institutions');
 Route::get('/nuevoEvento', 'RegistrarEventoController@__invoke')->name('nuevoEvento');
+Route::post('/registrarEvento', 'RegistrarEventoController@create')->name('registrarEvento');
 
 
 #Add "use Illuminate\Support\Facades\DB;" at the top of the script

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class MiCuentaController extends Controller
 {
@@ -23,7 +24,7 @@ class MiCuentaController extends Controller
             $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 2 and Permisos.id_permiso = rol_permiso.id_permiso');
         }
 
-        $eventos = DB::select('select * from Evento');
-        return view('normaluser.miCuenta')->with('permisos', $permisos);
+        $ins = DB::select('select * from Institucion');
+        return view('normaluser.miCuenta')->with('ins', $ins)->with('permisos', $permisos);
     }
 }

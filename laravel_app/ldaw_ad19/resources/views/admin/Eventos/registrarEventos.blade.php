@@ -55,7 +55,7 @@
                             <label for="fecha" class="col-md-4 col-form-label text-md-right">{{ __('Fecha') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fecha" type="text" class="form-control datepicker @error('fecha') is-invalid @enderror" name="fecha" value="{{ old('fecha') }}" required autocomplete="fecha" autofocus>
+                                <input id="fecha" type="text" class="form-control datepicker" name="fecha" value="{{ old('fecha') }}" required autocomplete="fecha" autofocus>
 
                                 @error('fecha')
                                     <span class="invalid-feedback" role="alert">

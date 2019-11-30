@@ -12,10 +12,12 @@
                 <h6 font-weight="lighter">Recibe notificaciones y explora eventos en tu área. Asiste a los mejores eventos. Paga rápido con tu tarjeta y confirma tu asistencia. </h6>
                 <br>
             </div>
-            <div class="col-md-2 mb-4">
-                <a class="btn btn-success" href="{{ route('nuevoEvento') }}" role="button"><i class="fas fa-pencil-alt"></i>&nbspCrear nuevo evento</a> 
-                <br>  
-            </div>
+            @if (Auth::user()->hasRole('Administrador'))
+                <div class="col-md-2 mb-4">
+                    <a class="btn btn-success" href="{{ route('nuevoEvento') }}" role="button"><i class="fas fa-pencil-alt"></i>&nbspCrear nuevo evento</a> 
+                    <br>  
+                </div>
+            @endif 
         </div>
     </div>
 

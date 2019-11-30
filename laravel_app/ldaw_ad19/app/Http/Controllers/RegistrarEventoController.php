@@ -20,15 +20,14 @@ class RegistrarEventoController extends Controller
         $request->user()->authorizeRoles(['Usuario', 'Administrador']);
         
         if($request->user()->hasRole('Administrador')){
+
             $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 1 and Permisos.id_permiso = rol_permiso.id_permiso');
+            $estados = DB::select('select id_estado, Nombre from Estado');
+            $instituciones = DB::select('select id_institucion, nombre from Institucion');
+            return view('admin.Eventos.registrarEventos')->with('instituciones', $instituciones)->with('estados', $estados)->with('permisos', $permisos);
         }else{
-            $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 2 and Permisos.id_permiso = rol_permiso.id_permiso');
+            return redirect('home');
         }
-
-
-        $estados = DB::select('select id_estado, Nombre from Estado');
-        $instituciones = DB::select('select id_institucion, nombre from Institucion');
-        return view('admin.Eventos.registrarEventos')->with('instituciones', $instituciones)->with('estados', $estados)->with('permisos', $permisos);
     }
 
     public function create()

@@ -1,27 +1,44 @@
 <?php
+ 
 namespace App\Http\Controllers\Auth;
+ 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-class ForgotPasswordController extends Controller
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+ 
+class ResetPasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset emails and
-    | includes a trait which assists in sending these notifications from
-    | your application to your users. Feel free to explore this trait.
-    |
-    */
-    use SendsPasswordResetEmails;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    use ResetsPasswords;
+ 
+    // Comentamos esto que no hace falta
+    // public function __construct()
+    // {
+    //     $this->middleware('guest');
+    // }
+    
+    public function reset(Request $request)
     {
-        $this->middleware('guest');
+        $this->validate($request, $this->rules(), $this->validationErrorMessages());
+ 
+        $response = $this->broker()->reset(
+            $this->credentials($request), function ($user, $password) {
+                $this->resetPassword($user, $password);
+            }
+        );
+ 
+        return $response == \Password::PASSWORD_RESET
+                    ? response()->success($response, 200)
+                    : response()->error($response, 422);
+    }
+ 
+    protected function resetPassword($user, $password)
+    {
+        $user->forceFill([
+            'password' => $password,
+            'remember_token' => str_random(60),
+        ])->save();
+ 
+        // GENERAR TOKEN PARA SATELLIZER AQUI ??
+        // $this->guard()->login($user);
     }
 }

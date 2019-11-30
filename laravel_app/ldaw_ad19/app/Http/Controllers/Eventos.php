@@ -4,32 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use App\Http\Controllers\Auth;
 
-
-class HomeController extends Controller
+class Eventos extends Controller
 {
-    protected $permisos;
-    protected $role;
     /**
-     * Create a new controller instance.
+     * Handle the incoming request.
      *
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function __invoke(Request $request)
     {
-        $this->middleware('auth');
-    }
 
-    
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index(Request $request)
-    {
         $request->user()->authorizeRoles(['Usuario', 'Administrador']);
         
         if($request->user()->hasRole('Administrador')){
@@ -37,8 +23,8 @@ class HomeController extends Controller
         }else{
             $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 2 and Permisos.id_permiso = rol_permiso.id_permiso');
         }
-        return view('home')->with('permisos', $permisos);
+
+        $eventos = DB::select('select * from Evento');
+        return view('admin.Eventos.eventos')->with('eventos', $eventos)->with('permisos', $permisos);
     }
-
-
 }

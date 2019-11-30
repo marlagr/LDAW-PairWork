@@ -5,6 +5,7 @@ namespace App;
 use App\Rol;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPassword;
 
 class User extends Authenticatable
 {
@@ -15,6 +16,12 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
 
     protected $table = 'Asistentes';
 

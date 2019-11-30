@@ -37,3 +37,6 @@ Route::get("testConnection", function(){
     //If this code works, connection is successfull
     echo "Connected to: " . DB::connection()->getDatabaseName();
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

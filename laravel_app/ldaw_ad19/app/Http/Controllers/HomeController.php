@@ -1,12 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Controllers\Auth;
-
-
 class HomeController extends Controller
 {
     protected $permisos;
@@ -20,9 +16,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
     
-
     /**
      * Show the application dashboard.
      *
@@ -39,6 +33,4 @@ class HomeController extends Controller
         }
         return view('home')->with('permisos', $permisos);
     }
-
-
 }

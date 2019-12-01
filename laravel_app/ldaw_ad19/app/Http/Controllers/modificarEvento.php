@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
 
-
-
 use Illuminate\Http\Request;
-use App\Http\Controllers\Evento;
+use Illuminate\Support\Facades\Input;
 use DB;
 
-class RegistrarEventoController extends Controller
+
+class modificarEvento extends Controller
 {
     /**
      * Handle the incoming request.
@@ -20,11 +20,12 @@ class RegistrarEventoController extends Controller
         $request->user()->authorizeRoles(['Usuario', 'Administrador']);
         
         if($request->user()->hasRole('Administrador')){
-
+            $id = Input::get('id');
+            $evento = DB::select('select * from Evento where id ='.$id);
             $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 1 and Permisos.id_permiso = rol_permiso.id_permiso');
             $estados = DB::select('select id_estado, Nombre from Estado');
             $instituciones = DB::select('select id_institucion, nombre from Institucion');
-            return view('admin.Eventos.registrarEventos')->with('instituciones', $instituciones)->with('estados', $estados)->with('permisos', $permisos);
+            return view('admin.Eventos.modificarEvento')->with('instituciones', $instituciones)->with('estados', $estados)->with('permisos', $permisos)->with('evento', $evento);
         }else{
             return redirect('home');
         }
@@ -34,8 +35,9 @@ class RegistrarEventoController extends Controller
     {
         $request->user()->authorizeRoles(['Usuario', 'Administrador']);
         
-            if($request->user()->hasRole('Administrador')){
-        
+        if($request->user()->hasRole('Administrador')){
+            $id = Input::get('id');
+
             $titulo_evento = request('titulo_evento');
             $descripcion = request('descripcion');
             $fecha = request('fecha');
@@ -48,8 +50,9 @@ class RegistrarEventoController extends Controller
             $id_estado = request('id_estado');
             $id_institucion = request('id_institucion');
 
-            DB::insert('insert into Evento(titulo_evento, descripcion, fecha, hora, sitio, ciudad, telefono, capacidad_maxima, costo, id_estado, id_institucion) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [$titulo_evento, $descripcion, $fecha, $hora, $sitio, $ciudad, $telefono, $capacidad_maxima, $costo, $id_estado, $id_estado ]);
-            
+            DB::table('Evento')
+                ->where('id', $id)
+                ->update(['titulo_evento' => $titulo_evento,'descripcion' => $descripcion, 'fecha' => $fecha, 'hora' => $hora, 'sitio' => $sitio, 'ciudad' => $ciudad, 'telefono' => $telefono, 'capacidad_maxima' => $capacidad_maxima, 'costo' => $costo, 'id_estado' => $id_estado, 'id_institucion' => $id_institucion ]);
 
             $request->user()->authorizeRoles(['Usuario', 'Administrador']);
             
@@ -58,16 +61,12 @@ class RegistrarEventoController extends Controller
             }else{
                 $permisos = DB::select('select DISTINCT Permisos.nombre, Permisos.ruta  from Permisos, rols, rol_permiso WHERE rol_permiso.rol_id = 2 and Permisos.id_permiso = rol_permiso.id_permiso');
             }
-
-
-            
-
             $eventos = DB::select('select * from Evento');
             return view('admin.Eventos.eventos')->with('eventos', $eventos)->with('permisos', $permisos);
-            //$save();
-            }else{
-                return redirect('home');
-            }
-    }
-
+        }else{
+            return redirect('home');
+        }
+      
+     }
+    
 }

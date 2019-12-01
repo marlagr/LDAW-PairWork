@@ -31,6 +31,8 @@ Route::get('/instituciones', 'Eventos@__invoke')->name('institutions');
 Route::get('/nuevoEvento', 'RegistrarEventoController@__invoke')->name('nuevoEvento');
 Route::post('/registrarEvento', 'RegistrarEventoController@create')->name('registrarEvento');
 Route::get('/evento', 'DetalleEvento@__invoke')->name('evento');
+Route::get('/modificarEvento', 'modificarEvento@__invoke')->name('modificarEvento');
+Route::post('/eventoAModificar', 'modificarEvento@create')->name('eventoAModificar');
 
 
 

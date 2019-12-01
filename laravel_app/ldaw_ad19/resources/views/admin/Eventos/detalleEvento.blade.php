@@ -12,7 +12,15 @@
             <div class="col-md-9 mb-4">
                 <div class="row row-cols-1 row-cols-md-2">                 
                     @foreach($evento as $item)
-                        <h2 class="mb-8"><b>{{$item->titulo_evento}}</b></h2> 
+                        <div class="col">
+                            <h2 class="mb-8 row"><b>{{$item->titulo_evento}}</b></h2> 
+                            @if (Auth::user()->hasRole('Administrador'))
+                            <div class=" float-right">
+                                <a class="btn btn-success" href="{!! route('modificarEvento', ['id' => $item->id]) !!}" role="button"><i class="fas fa-pencil-alt"></i>&nbspModificar evento</a> 
+                                <br>  
+                            </div>
+                        @endif
+                        </div>
                         <div class="row mx-md-n5">
                             <div class="col px-md-5">
                                 <div class="p-3  mb-3">

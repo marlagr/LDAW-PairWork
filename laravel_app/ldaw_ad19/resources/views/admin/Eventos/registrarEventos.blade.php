@@ -54,8 +54,8 @@
                         <div class="form-group row">
                             <label for="fecha" class="col-md-4 col-form-label text-md-right">{{ __('Fecha') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="fecha" type="text" class="form-control datepicker" name="fecha" value="{{ old('fecha') }}" required autocomplete="fecha" autofocus>
+                            <div class="col-md-6">                              
+                                <input id="fecha" type="text" class="form-control datepicker" name="fecha" value="{{ old('fecha') }}" required autocomplete="fecha" placeholder="AAAA-MM-DD" autofocus>
 
                                 @error('fecha')
                                     <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
                             <label for="hora" class="col-md-4 col-form-label text-md-right">{{ __('Hora') }}</label>
 
                             <div class="col-md-6">
-                                <input id="hora" type="text" class="form-control @error('name') is-invalid @enderror" name="hora" value="{{ old('hora') }}" required autocomplete="hora" autofocus>
+                                <input id="hora" type="text" class="form-control @error('name') is-invalid @enderror" name="hora" value="{{ old('hora') }}" placeholder="HH:MM:SS" required autocomplete="hora" autofocus>
 
                                 @error('hora')
                                     <span class="invalid-feedback" role="alert">
@@ -186,8 +186,10 @@
     </div>
 </div>
 <script src="https://kit.fontawesome.com/1e8f374826.js" crossorigin="anonymous"></script>
+
 <script>
-    $('#sandbox-container input').datepicker({
-});
+    $(function () {
+    $('#example1').datetimepicker();
+    });
 </script>
 @endsection

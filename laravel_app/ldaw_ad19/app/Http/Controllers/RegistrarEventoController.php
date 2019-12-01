@@ -30,7 +30,7 @@ class RegistrarEventoController extends Controller
         }
     }
 
-    public function create()
+    public function create(Request $request)
     {
       
         $titulo_evento = request('titulo_evento');
